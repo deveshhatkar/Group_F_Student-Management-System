@@ -11,7 +11,7 @@ Running **make** on Windows Subsusyem for Linux, with Ubuntu + mingw-w64 Cross c
 make
 ```
 
-# Executing the Project
+# Run
 Run the binary file via Windows command line or Powershell:
 ```
 .\bin\StudentMgr.exe
