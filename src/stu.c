@@ -28,6 +28,7 @@ void stu_query_id(p_stu_t stu_list)
 	ui_cls();
 	printf("Enter ID:");
 	scanf("%d", &id);
+	getchar();
 	while (p) {
 		if (p->stu_id == id) {
 			printf("%4d  %-8s", p->stu_id, p->stu_name);
@@ -63,6 +64,7 @@ void stuinfo_add(p_stu_t* stu_list)
 		for (i = 0; i < COURSE_NUM_PER_STUDENT; i++) {
 			scanf("%d%lf", &p->course[i].course_id, &p->course[i].course_score);
 		}
+		getchar();
 		if (!(*stu_list)->next) {
 			p->next = (*stu_list)->next;
 			(*stu_list)->next = p;
@@ -95,12 +97,15 @@ void stuinfo_add(p_stu_t* stu_list)
 		else {
 			printf("Add failed!\nThe ID has been used.\n");
 		}
-		printf("\nDo you want to add more? [y/n]");
+	/*	printf("\nDo you want to add more? [y/n]"); 
 		char c = ui_get_option();
 		if (c != 'y')
 		{
 			break;
-		}
+		}*/
+		printf("Press Enter to continue...");
+		ui_pause();
+		break;
 	}
 }
 
@@ -112,6 +117,7 @@ void stuinfo_del(p_stu_t* stu_list)
 	ui_cls();
 	printf("Enter the ID need to be deleted:");
 	scanf("%d", &id);
+	getchar();
 	while (pcur) {
 		if (pcur->stu_id == id) {
 			pre->next = pcur->next;
@@ -144,11 +150,12 @@ void stu_query_by_name(p_stu_t stu_list)
 	ui_cls();
 	printf("Enter name:");
 	scanf("%s", name);
+	getchar();
 	while (p) {
 		if (!strcmp(p->stu_name, name)) {
-			printf("%04d  %-8s ", p->stu_id, p->stu_name);
+			printf("%4d  %-8s ", p->stu_id, p->stu_name);
 			for (i = 0; i < COURSE_NUM_PER_STUDENT; i++) {
-				printf("%05d %-8.2f", p->course[i].course_id, p->course[i].course_score);
+				printf("%5d %-8.2f", p->course[i].course_id, p->course[i].course_score);
 			}
 			printf("\n");
 			flag = 1;
@@ -173,7 +180,7 @@ void stu_query_listall(p_stu_t stu_list)
 	while (p) {
 		printf("%4d  %-8s ", p->stu_id, p->stu_name);
 		for (i = 0; i < COURSE_NUM_PER_STUDENT; i++) {
-			printf("%5d %-8.2f", p->course[i].course_id, p->course[i].course_score);
+			printf("%5d %-7.2f", p->course[i].course_id, p->course[i].course_score);
 		}
 		printf("\n");
 		p = p->next;
@@ -189,6 +196,7 @@ void stuinfo_update(p_stu_t* stu_list)
 	ui_cls();
 	printf("Enter ID:");
 	scanf("%d", &id);
+	getchar();
 	while (p) {
 		if (p->stu_id == id)
 		{

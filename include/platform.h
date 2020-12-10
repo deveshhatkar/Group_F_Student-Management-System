@@ -1,3 +1,8 @@
+// Header for cross-platform determination based on answers from the following Stack Overflow question
+// https://stackoverflow.com/questions/5919996/how-to-detect-reliably-mac-os-x-ios-linux-windows-in-c-preprocessor
+// Question by Brian Tompsett
+// Answers by Evgeny Gavrin, Top-Master, PatchyFog and Buzz Lightyear
+
 #pragma once
 #ifndef PLATFORM_H
 #define PLATFORM_H
@@ -36,4 +41,5 @@
 #else
 #   error "Unknown compiler"
 #endif
-#endif#pragma once
+#endif
+
