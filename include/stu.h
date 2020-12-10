@@ -18,7 +18,7 @@ typedef struct student {
 }stu_t, * p_stu_t;
 
 
-void stuinfo_query(p_stu_t, int);
+void stuinfo_query(p_stu_t);
 
 void stu_query_by_name(p_stu_t);
 
@@ -26,11 +26,11 @@ void stu_query_listall(p_stu_t);
 
 void stu_query_id(p_stu_t);
 
-void stuinfo_add(p_stu_t*, char*);
+void stuinfo_add(p_stu_t*);
 
-void stuinfo_update(p_stu_t*, char*);
+void stuinfo_update(p_stu_t*);
 
-void stuinfo_del(p_stu_t*, char*);
+void stuinfo_del(p_stu_t*);
 
 
 #endif
