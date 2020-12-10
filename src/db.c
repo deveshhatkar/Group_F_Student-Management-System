@@ -4,6 +4,7 @@
 #include "db.h"
 #include "stu.h"
 #include "ui.h"
+#include "platform.h"
 
 int app_start(char* conf_file)
 {
@@ -15,7 +16,7 @@ int app_start(char* conf_file)
 
 	init_env(&stu_list);
 	while (1) {
-		system("cls");
+		system(CLS_COMMAND);
 		ui_init();
 		printf("Please enter a number to proceed: ");
 		int button = ui_get_option();
