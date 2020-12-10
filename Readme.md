@@ -6,13 +6,14 @@ The Student Records Management System aims to digitize and hence ease the proces
 Hence, this software is an attempt to utilize the perks of using a digital system for managing data.
 
 # Building Guidelines
-Running **make** on Windows Subsusyem for Linux, with Ubuntu + mingw-w64 Cross compiling to build:
+Running **make** on Windows Subsusyem for Linux to build: 
+(Other platforms not tested)
 ```
 make
 ```
 
 # Run
-Run the binary file via Windows command line or Powershell:
+Run the binary file with the following command:
 ```
-.\bin\StudentMgr.exe
+./bin/stumgr
 ```
