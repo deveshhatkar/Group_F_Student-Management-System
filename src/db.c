@@ -44,3 +44,7 @@ void init_env(p_stu_t* stu_list)
 	*stu_list = stu_head;
 	memset(&tmp_stu, 0, sizeof(stu_t));
 }
+
+void studb_update(p_stu_t* stu_list);
+
+void userdb_update(p_user_t* user_list);
