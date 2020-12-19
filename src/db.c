@@ -28,7 +28,11 @@ int app_start(char* conf_file_path)
 
 
 	if(NULL == config_file)
-        printf("Configuration File Not Found!");
+	{
+        printf("Configuration File \"%s\" Not Found!\nProgram Exits\n",conf_file_path);
+		getchar(); 
+		return -1;
+	}
     else
     {
         //Getting User file path from Config file.
@@ -84,8 +88,8 @@ int app_start(char* conf_file_path)
 		ui_cls();
 		printf("Username:");
 		scanf("%s", &user.name);
+		getchar();
 		printf("Password:");
-		fflush(stdin);
 		get_pass(user.pass);
 		if (user_auth(user_list, user))
 		{
@@ -156,7 +160,9 @@ void init_env(p_stu_t* stu_list, p_user_t* user_list)
 	}
 	else
 	{
-		printf("User data could not be Loaded. Please check if the User data file exists!\n");
+		printf("User data could not be Loaded.(\"%s\")\nPlease check if the User data file exists!\nPress Enter to exit program\n", user_file_path);
+		getchar();
+		return;
 	}
 
 	if (student_file != NULL)
@@ -204,7 +210,12 @@ void init_env(p_stu_t* stu_list, p_user_t* user_list)
 		fclose(student_file);
 	}
 	else
-		printf("Student data could not be Loaded. Please check if the Student data file exists!\n");
+	{
+		printf("Student data could not be Loaded.(\"%s\")\nPlease check if the Student data file exists!\nPress Enter to exit program\n",student_file_path);
+		getchar();
+		return;
+	}
+		
 }
 
 void studb_update(p_stu_t* stu_list, char* str)
@@ -233,10 +244,10 @@ void studb_update(p_stu_t* stu_list, char* str)
     }
 }
 
-void userdb_update(p_user_t* user_list, char* str)
+void userdb_update(p_user_t user_list, char* str)
 {
 	FILE* user_file = fopen(user_file_path, "w");
-    p_user_t p = (*user_list)->next;
+    p_user_t p = user_list->next;
 	
 	if(NULL == user_file)
     {

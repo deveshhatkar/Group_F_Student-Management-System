@@ -43,7 +43,7 @@ void get_pass(char* password)
 	#elif __linux__ || __APPLE__
 	char *pass_string = getpass("");
 	strncpy(password,pass_string,USER_PASS_MAXLEN);
-	password[USER_PASS_MAXLEN] = '\0';
+	password[USER_PASS_MAXLEN - 1] = '\0';
 	#endif
 }
 
@@ -114,9 +114,9 @@ void route_admin(p_user_t* user_list, p_stu_t* stu_list, char* str1, char* str2)
 		case '2':stuinfo_del(stu_list, str2); break;
 		case '3':stuinfo_update(stu_list, str2); break;
 		case '4':stuinfo_query(*stu_list, ADMIN);   break;
-		case '5':user_add(user_list, str1); break;
-		case '6':user_del(user_list, str1); break;
-		case '7':user_update(user_list, str1); break;
+		case '5':user_add(*user_list, str1); break;
+		case '6':user_del(*user_list, str1); break;
+		case '7':user_update(*user_list, str1); break;
 		case '8':ui_user_query(*user_list); break;
 		case '9':ui_exit(); break;
 		default: ui_invalid_prompt();
@@ -147,10 +147,10 @@ void ui_admin()
 	printf("[2] %-8s existed student record\n", "delete");
 	printf("[3] %-8s existed student record\n", "modify");
 	printf("[4] %-8s student record\n", "search");
-	printf("[5] %-8s new user acount record\n", "add");
-	printf("[6] %-8s existed acount record\n", "delete");
-	printf("[7] %-8s existed acount record\n", "modify");
-	printf("[8] %-8s acount record\n", "search");
+	printf("[5] %-8s new user account record\n", "add");
+	printf("[6] %-8s existed account record\n", "delete");
+	printf("[7] %-8s existed account record\n", "modify");
+	printf("[8] %-8s account record\n", "search");
 	printf("[9] exit\n\n");
 }
 
