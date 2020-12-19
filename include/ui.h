@@ -8,18 +8,16 @@
 #include "stu.h"
 #include "user.h"
 
-#define CLEAR_BUF \
-    {\
-    int ch; \
-while ((ch = getchar()) != EOF && ch != '\n')\
-        {\
-        ; \
-        }\
-    }
 
+void ui_cls();
 
+void ui_pause();
 
-void get_pass(char* password);
+void ui_invalid_prompt();
+
+char ui_get_option();
+
+void get_pass(char*);
 
 void route_admin(p_user_t*, p_stu_t*, char*, char*);
 
@@ -34,6 +32,8 @@ void ui_guest();
 void ui_stu_query(int);
 
 void ui_user_query(p_user_t);
+
+void ui_user_query_by_name((p_user_t);
 
 void ui_exit();
 
