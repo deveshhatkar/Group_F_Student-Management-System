@@ -1,6 +1,7 @@
 #include "stu.h"
 #include "ui.h"
 #include "user.h"
+#include "db.h"
 
 void stuinfo_query(p_stu_t stu_list, int limit)
 {

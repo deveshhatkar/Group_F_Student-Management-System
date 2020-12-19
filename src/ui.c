@@ -22,29 +22,29 @@ static char ui_input_buffer[UI_INPUT_BUFFER_LEN];
 /**
 *This function gets the password the user inputs. 
 */
-void get_pass(char* password)
+void get_pass(char* password)
 {
-    int index = 0;
-    char ch;
-    #ifdef _WIN32
-    while ((ch = _getch()) != '\r'){
-        if (ch != '\b')
-        {
-            printf("*");
-            password[index++] = ch;
-        }
-        else
-        {
-            printf("\b \b");
-            index--;
-        }
-        password[index] = '\0';
-    }
-    #elif __linux__ || __APPLE__
-    char *pass_string = getpass("");
-    strncpy(password,pass_string,USER_PASS_MAXLEN);
-    password[USER_PASS_MAXLEN] = '\0';
-    #endif
+	int index = 0;
+	char ch;
+	#ifdef _WIN32
+	while ((ch = _getch()) != '\r'){
+		if (ch != '\b')
+		{
+			printf("*");
+			password[index++] = ch;
+		}
+		else
+		{
+			printf("\b \b");
+			index--;
+		}
+		password[index] = '\0';
+	}
+	#elif __linux__ || __APPLE__
+	char *pass_string = getpass("");
+	strncpy(password,pass_string,USER_PASS_MAXLEN);
+	password[USER_PASS_MAXLEN] = '\0';
+	#endif
 }
 
 /**
