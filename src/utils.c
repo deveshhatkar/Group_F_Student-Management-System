@@ -2,7 +2,7 @@
 
 // utils.c
 // Siyuan Chen 
-// Dec.16, 2020
+// Dec.18, 2020
 
 #include "utils.h"
 
@@ -36,7 +36,6 @@ int ask_for_input(char* _to_print, bool bound_enable, int lower_bound, int upper
 	// Logic: ask_for_input
 	int _to_return;
 	for(_to_return=INT_MIN;;){
-		ui_cls();
 		if (bound_enable==false)       printf("%s:",_to_print);
 		else printf("%s (%d-%d):",_to_print,lower_bound,upper_bound);
 		scanf("%d",&_to_return);
@@ -63,9 +62,10 @@ char* string_input(char* output, int max_length){
 		exit(-1);
 	}
 
-	char* _to_return = calloc(max_length + 1, sizeof(char));
+	char* _to_return = (char*) calloc(max_length + 1, sizeof(char));
 	printf("%s: ",output);
-	fgets(_to_return, max_length + 1, stdin);
+	scanf("%s", _to_return);
 	getchar();
 	return _to_return;
 }
+

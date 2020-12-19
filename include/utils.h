@@ -16,6 +16,7 @@
 
 #include "stu.h"
 #include "user.h"
+#include "ui.h"
 
 //STUB
 #define _type_account_admin 0

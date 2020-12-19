@@ -24,12 +24,16 @@ void user_query_listall(p_user_t);
 
 void user_query_by_level(p_user_t);
 
-void user_query_by_name(p_user_t);
+int user_query_by_name(p_user_t user_list, char* input, int enable_output);
 
-void user_add(p_user_t*, char*);
+void user_add(p_user_t, char*);
 
-void user_update(p_user_t*, char*);
+void user_update(p_user_t, char*);
 
-void user_del(p_user_t*, char*);
+void user_del(p_user_t, char*);
+
+char* password_create (char* , int );
+
+
 
 #endif
