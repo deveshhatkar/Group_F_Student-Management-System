@@ -4,28 +4,36 @@
 
 #include <string.h>
 #include <stdio.h>
-#include <stdlib.h>
 
 #include "stu.h"
 #include "user.h"
 
-void ui_cls();
+#define CLEAR_BUF \
+    {\
+    int ch; \
+while ((ch = getchar()) != EOF && ch != '\n')\
+        {\
+        ; \
+        }\
+    }
 
-void ui_pause();
 
-void ui_invalid_prompt();
 
-char ui_get_option();
+void get_pass(char* password);
 
-void route_admin(p_stu_t*);
+void route_admin(p_user_t*, p_stu_t*, char*, char*);
 
-char ui_get_option();
+void route_guest(p_stu_t);
 
 void ui_init();
 
 void ui_admin();
 
-void ui_stu_query();
+void ui_guest();
+
+void ui_stu_query(int);
+
+void ui_user_query(p_user_t);
 
 void ui_exit();
 
