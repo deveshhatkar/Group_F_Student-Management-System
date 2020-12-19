@@ -1,0 +1,3 @@
+../config/user_list.txt
+../config/student_list.txt
+end
