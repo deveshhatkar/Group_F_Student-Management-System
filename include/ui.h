@@ -3,6 +3,7 @@
 #define UI_H
 
 #include <string.h>
+#include <stdlib.h>
 #include <stdio.h>
 
 #include "stu.h"
@@ -33,7 +34,7 @@ void ui_stu_query(int);
 
 void ui_user_query(p_user_t);
 
-void ui_user_query_by_name((p_user_t);
+void ui_user_query_by_name(p_user_t);
 
 void ui_exit();
 

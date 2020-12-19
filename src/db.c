@@ -7,8 +7,8 @@
 #include "user.h"
 #include "platform.h"
 
-char student_file_path[1024] = "";
-char user_file_path[1024] = "";
+char student_file_path[1024];
+char user_file_path[1024];
 
 int app_start(char* conf_file_path)
 {
@@ -63,7 +63,7 @@ int app_start(char* conf_file_path)
 
     while (1)
 	{
-		system("cls");
+		ui_cls();
 		ui_init();
 		printf("Please enter a number to select your account type: ");
 		button = getchar() - '0';
@@ -78,10 +78,10 @@ int app_start(char* conf_file_path)
 		{
 			fflush(stdin);
 			printf("Invalid input!\nEnter any key back to last page.");
-			_getch();
+			getchar();
 			continue;
 		}
-		system("cls");
+		ui_cls();
 		printf("Username:");
 		scanf("%s", &user.name);
 		printf("Password:");
@@ -104,8 +104,9 @@ int app_start(char* conf_file_path)
 			printf("\nNo results!\n");
 			fflush(stdin);
 			printf("Enter c return to login menu. Enter other key to quit system.");
-			if (_getch() != 'c')
+			if (getchar() != 'c')
 				break;
+			getchar();
 		}
 
 	}
@@ -155,7 +156,7 @@ void init_env(p_stu_t* stu_list, p_user_t* user_list)
 	}
 	else
 	{
-		printf("User data could not be Loaded. Please check if the User data file exists!");
+		printf("User data could not be Loaded. Please check if the User data file exists!\n");
 	}
 
 	if (student_file != NULL)
@@ -203,7 +204,7 @@ void init_env(p_stu_t* stu_list, p_user_t* user_list)
 		fclose(student_file);
 	}
 	else
-		printf("Student data could not be Loaded. Please check if the Student data file exists!");
+		printf("Student data could not be Loaded. Please check if the Student data file exists!\n");
 }
 
 void studb_update(p_stu_t* stu_list, char* str)
@@ -213,7 +214,7 @@ void studb_update(p_stu_t* stu_list, char* str)
 
 
     if(NULL == student_file)
-        printf("\nStudent File path inside Configuration file incorrect!\nStudent Details could not be updated to File.");
+        printf("\nStudent File path inside Configuration file incorrect!\nStudent Details could not be updated to File.\n");
     else
     {
         while (NULL != p)
