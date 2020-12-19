@@ -4,6 +4,7 @@
 #include "db.h"
 #include "stu.h"
 #include "ui.h"
+#include "user.h"
 #include "platform.h"
 
 char student_file_path[1024] = "";
@@ -15,7 +16,13 @@ int app_start(char* conf_file_path)
 	// 	printf("The program will run in memory-based mode. Configurations will be ignored.");
 	// }
 
-	stu_t* stu_list = NULL;
+	char r_str[1024] = "";
+
+    stu_t* stu_list = NULL;
+	user_t* user_list = NULL;
+
+	int button;
+	user_t user;
 
 	FILE* config_file = fopen(conf_file_path, "r");
 
@@ -51,7 +58,7 @@ int app_start(char* conf_file_path)
         user_file_path[strlen(user_file_path)] = '\0';
     }
 
-	init_env(&stu_list);
+	init_env(&stu_list, &user_list);
 	
 
     while (1)
@@ -104,7 +111,7 @@ int app_start(char* conf_file_path)
 	}
 }
 
-void init_env(p_stu_t* stu_list)
+void init_env(p_stu_t* stu_list, p_user_t* user_list)
 {
 	FILE* user_file = fopen(user_file_path, "r+");
 	FILE* student_file = fopen(student_file_path, "r+");

@@ -3,10 +3,11 @@
 #define DB_H
 
 #include "stu.h"
+#include "user.h"
 
-int app_start(char* conf_filename);
+int app_start(char* conf_file_path);
 
-void init_env(p_stu_t* stu_list);
+void init_env(p_stu_t* stu_list, p_user_t* user_list);
 
 void studb_update(p_stu_t* stu_list, char* str);
 
