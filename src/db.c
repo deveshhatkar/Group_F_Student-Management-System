@@ -12,10 +12,6 @@ char user_file_path[1024];
 
 int app_start(char* conf_file_path)
 {
-	// if (strlen(conf_file) > 0) {
-	// 	printf("The program will run in memory-based mode. Configurations will be ignored.");
-	// }
-
 	char r_str[1024] = "";
 
     stu_t* stu_list = NULL;
@@ -25,7 +21,6 @@ int app_start(char* conf_file_path)
 	user_t user;
 
 	FILE* config_file = fopen(conf_file_path, "r");
-
 
 	if(NULL == config_file)
 	{
@@ -71,17 +66,16 @@ int app_start(char* conf_file_path)
 		ui_init();
 		printf("Please enter a number to select your account type: ");
 		button = getchar() - '0';
-		if (2 == button)
-		{
+		if (2 == button){
 			ui_exit();
 			return 0;
 		}
-		else if (ADMIN == button || GUEST == button)
+		else if (ADMIN == button || GUEST == button){
 			user.type = button;
-		else
-		{
+		}
+		else{
 			fflush(stdin);
-			printf("Invalid input!\nEnter any key back to last page.");
+			printf("Invalid input!\nPress Enter to back to last page.");
 			getchar();
 			continue;
 		}
@@ -91,25 +85,21 @@ int app_start(char* conf_file_path)
 		getchar();
 		printf("Password:");
 		get_pass(user.pass);
-		if (user_auth(user_list, user))
-		{
-			if (user.type == ADMIN)
-			{
+		if (user_auth(user_list, user)){
+			if (user.type == ADMIN){
 				route_admin(&user_list, &stu_list, user_file_path, student_file_path);
 			}
-			else if (user.type == GUEST)
-			{
+			else if (user.type == GUEST){
 				route_guest(stu_list);
 			}
 			break;
 		}
-		else
-		{
-			printf("\nNo results!\n");
-			fflush(stdin);
-			printf("Enter c return to login menu. Enter other key to quit system.");
+		else{
+			printf("\nIncorrect user name, password or account type\n");
+			printf("Enter c return to login menu. Enter other key to quit system.\n");
 			if (getchar() != 'c')
 				break;
+			fflush(stdin);
 			getchar();
 		}
 

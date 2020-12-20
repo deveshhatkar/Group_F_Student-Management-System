@@ -23,34 +23,28 @@ typedef struct user {
 	struct user* next;
 }user_t, *p_user_t;
 
+#include <stdlib.h>
+#include "ui.h"
+#include "db.h"
+#include "utils.h"
 
 /** \brief Check username and password
  * 
  * user_auth: authenticate the user with username and password.
  * @param[in] user_list p_user_t: The head of linked list of all user accounts.
- * @param[in] user user_t: includes name and password being input for authenticate
+ * @param[in] user user_t: includes name, password and type being input for authenticate. Set user.type=-1 to disable type comparison.
  * @returns 1 if username and password both match. Return 0 if one of them does not match.
  */ 
-int user_auth(p_user_t, user_t);
-
-
-/** @brief List all users with name and type
- * 
- * user_query_listall
- * Print all users with name and type to stdout.
- * @param[in] user_list p_user_t: The head of linked list of all user accounts.
- */
-void user_query_listall(p_user_t);
-
+int user_auth(p_user_t user_list, user_t user);
 
 /** @brief List all users of admin type or student type. 
  * 
  * user_query_by_level
  * Print all users with name of a certain type to stdout.
  * @param[in] user_list p_user_t: The head of linked list of all user accounts.
- * @param[in] 
+ * @param[in] account_type int: 0 for listing Admin accounts, 1 for listing user accounts. -1 to list all accounts.
  */
-void user_query_by_level(p_user_t);
+void user_query_by_level(p_user_t user_list, int account_type);
 
 
 /** @brief List all user with the name input
@@ -72,7 +66,7 @@ int user_query_by_name(p_user_t user_list, char* input, int enable_output);
  * @param[in] user_list p_user_t: The head of linked list of all user accounts.
  * @param[in] file_to_save char*:string of filename to be saved. Will be passed to db part.
  */
-void user_add(p_user_t, char*);
+void user_add(p_user_t user_list, char* file_to_save);
 
 
 /** @brief modify the information of a user based on the name input
@@ -83,7 +77,7 @@ void user_add(p_user_t, char*);
  * @param[in] user_list p_user_t: The head of linked list of all user accounts.
  * @param[in] file_to_save char*:string of filename to be saved. Will be passed to db part.
  */
-void user_update(p_user_t, char*);
+void user_update(p_user_t user_list, char* file_to_save);
 
 
 /** @brief delete a user by the name
@@ -94,6 +88,6 @@ void user_update(p_user_t, char*);
  * @param[in] user_list p_user_t: The head of linked list of all user accounts.
  * @param[in] file_to_save char*:string of filename to be saved. Will be passed to db part.
  */
-void user_del(p_user_t, char*);
+void user_del(p_user_t user_list, char* file_to_save);
 
 #endif

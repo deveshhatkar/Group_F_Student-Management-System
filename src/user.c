@@ -9,65 +9,34 @@
  * @author Siyuan Chen
  * 
  */
-#include <stdlib.h>
 #include "user.h"
-#include "ui.h"
-#include "utils.h"
-#include "db.h"
 
-int user_auth(p_user_t user_list, user_t user) 
+int user_auth(p_user_t user_list, user_t user)
 {
 	p_user_t now = user_list;
-	for(;now->next!=NULL;now=now->next)
+	for(;now!=NULL;now=now->next)
 	{
 		if((strcmp(now->name,user.name)==0) && 
-		   (strcmp(now->pass,user.pass)==0)) return 1;
+		   (strcmp(now->pass,user.pass)==0) &&
+		   ((now->type==user.type) || (user.type == -1))) return 1;
 	}
 	// Return 0 if nothing found.
 	return 0;
 }
 
-
-void user_query_listall(p_user_t user_list)
+/* With UI */
+void user_query_by_level(p_user_t user_list, int account_type)
 {
-	ui_cls();
-	p_user_t p=user_list;
-	for(p=p->next;p!=NULL;p=p->next){
-		printf("Username: %s, Type of Account: ",p->name);
-		if(p->type==_type_account_admin) {
-			printf("ADMIN");          
-		}
-		else if (p->type==_type_account_student) {
-			printf("Student");
-		}
-		else printf("Unknown type %d",p->type);
-		printf("\n");
-	}
-	getchar();
-	return;
-}
-
-/** @brief List all users of admin type or student type. 
- * 
- * user_query_by_level
- * Print all users with name of a certain type to stdout.
- * @param[in] user_list p_user_t: The head of linked list of all user accounts.
- * @param[in] 
- */
-
-void user_query_by_level(p_user_t user_list)
-{
-	int account_type = ask_for_input("Enter an account type(0: Admin, 1: Student)", 1, 0, 1);
 	p_user_t p = user_list;
 	for(p=p->next;p!=NULL;p=p->next) {
-		if(p->type==account_type) {
+		if(p->type==account_type || account_type == -1) {
 			printf("Username: %s, Type: %s\n", p->name,  account_type_tostring(p->type));
 		}
 	}
+	printf("Press Enter to return to the menu...");
 	getchar();
 	return;
 }
-
 
 int user_query_by_name(p_user_t user_list, char* input, int enable_output) 
 {
@@ -90,9 +59,8 @@ int user_query_by_name(p_user_t user_list, char* input, int enable_output)
 	return count;
 }
 
-
-
-void user_add(p_user_t user_list, char* file_to_save) // with ui
+/* With UI */
+void user_add(p_user_t user_list, char* file_to_save) 
 {
 	p_user_t p = user_list;
 	p_user_t _to_add=(p_user_t)calloc(1,sizeof(p_user_t));
@@ -115,12 +83,12 @@ void user_add(p_user_t user_list, char* file_to_save) // with ui
 	p->next = _to_add;
 	_to_add->next = NULL;
 
-	userdb_update(user_list,file_to_save);
+	userdb_update(user_list, file_to_save);
 
 	return;
 }
 
-
+/* With UI */
 void user_update(p_user_t user_list, char* file_to_save)
 {
 	if(user_list==NULL){
@@ -129,24 +97,25 @@ void user_update(p_user_t user_list, char* file_to_save)
 		return;
 	}
 	p_user_t p = user_list;
-	char *_temp_username, *_temp_password;
-	int _temp_account_type = -1;
-	char *_user_to_update = string_input("Input Username",USER_NAME_MAXLEN);
+	char *username_temp, *password_temp;
+	int account_type_temp = -1;
+	char *user_to_update = string_input("Input Username",USER_NAME_MAXLEN);
 	for(p=p->next;p!=NULL;p=p->next){
-		if(strcmp(_user_to_update,p->name)==0){
-			_temp_username = string_input("Update Username (Enter -1 to skip)",USER_NAME_MAXLEN);
-			if(strcmp(_temp_username,"-1")!=0) {
-				strcpy(p->name,_temp_username);
+		if(strcmp(user_to_update,p->name)==0){
+			/* Did not implement catching keys from terminal, as it is OS specific */
+			username_temp = string_input("Update Username (Enter -1 to skip)",USER_NAME_MAXLEN);
+			if(strcmp(username_temp,"-1")!=0) {
+				strcpy(p->name,username_temp);
 				printf("Username updated\n");
 			}
-			_temp_password = password_create("Update Password (Enter -1 twice to skip)",USER_PASS_MAXLEN);
-			if(strcmp(_temp_password,"-1")!=0) {
-				strcpy(p->pass, _temp_password);
+			password_temp = password_create("Update Password (Enter -1 as password to skip)",USER_PASS_MAXLEN);
+			if(strcmp(password_temp,"-1")!=0) {
+				strcpy(p->pass, password_temp);
 				printf("Password updated\n");
 			}
-			_temp_account_type = ask_for_input("Update Account Type\n(0: Admin, 1:Student, -1:Do not update)",true,-1,1);
-			if(_temp_account_type != -1) {
-				p->type = _temp_account_type;
+			account_type_temp = ask_for_input("Update Account Type\n(0: Admin, 1:Student, -1:Do not update)",true,-1,1);
+			if(account_type_temp != -1) {
+				p->type = account_type_temp;
 				printf("Account type updated\n");
 			}
 			userdb_update(user_list,file_to_save);
@@ -159,7 +128,7 @@ void user_update(p_user_t user_list, char* file_to_save)
 	return;
 }
 
-
+/* With UI */
 void user_del(p_user_t user_list, char* file_to_save)
 {
 	if(user_list==NULL){
