@@ -1,3 +1,15 @@
+/** @file user.c
+ * 
+ * @brief Functions featuring System Initialization and Save Change to Files
+ * 
+ * user.c
+ * Includes all the functions that initialize the system, Load data from files.
+ * Includes all the functions defined to make the changes performed by system non-volatile.
+ * Includes all the functions that handle file read/write to make changes permenant.
+ * 
+ * @author Devesh Hatkar
+ * 
+ */
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -10,7 +22,7 @@
 char student_file_path[1024];
 char user_file_path[1024];
 
-int app_start(char* conf_file_path)
+void app_start(char* conf_file_path)
 {
 	char r_str[1024] = "";
 
@@ -30,7 +42,7 @@ int app_start(char* conf_file_path)
 	}
     else
     {
-        //Getting User file path from Config file.
+        /* Get file path for saved Student and User records from configuration file */
         fgets(r_str, sizeof(r_str) - 1, config_file);
         strncpy(user_file_path, r_str, strlen(r_str) - 1);
 
@@ -58,13 +70,15 @@ int app_start(char* conf_file_path)
 		}
     }
 
-	init_env(&stu_list, &user_list);
-	
+    /* Load Data from Student and User files to the system and attach to 'stu_list' and 'user_list' heads */
+	init_env(&stu_list, &user_list);	
 
     while (1)
 	{
 		ui_cls();
 		ui_init();
+
+		/* Interface to select User Role */
 		printf("Please enter a number to select your account type: ");
 		button = getchar() - '0';
 		if (2 == button){
@@ -81,6 +95,8 @@ int app_start(char* conf_file_path)
 			continue;
 		}
 		ui_cls();
+
+		/* Ask for user name and password */
 		printf("Username:");
 		scanf("%s", &user.name);
 		getchar();
@@ -107,6 +123,7 @@ int app_start(char* conf_file_path)
 	}
 }
 
+
 void init_env(p_stu_t* stu_list, p_user_t* user_list)
 {
 	FILE* user_file = fopen(user_file_path, "r+");
@@ -121,6 +138,7 @@ void init_env(p_stu_t* stu_list, p_user_t* user_list)
 
 	int i;
 
+	/* Attaching generated linked list to function parameter as output */
 	*user_list = user_head;
 	*stu_list = stu_head;
 
@@ -129,6 +147,7 @@ void init_env(p_stu_t* stu_list, p_user_t* user_list)
 
 	if (user_file != NULL)
 	{
+		/* Retrive User records saved in File as linked list */
 		while ((fscanf(user_file, "%s%s%d", &tmp_user.name, &tmp_user.pass, &tmp_user.type)) != EOF)
 		{
 			puser = (p_user_t)calloc(1, sizeof(user_t));
@@ -137,6 +156,7 @@ void init_env(p_stu_t* stu_list, p_user_t* user_list)
 			puser->type = tmp_user.type;
 			if (NULL == user_head->next)
 			{
+				/* When List initially empty */
 				puser->next = user_head->next;
 				user_head->next = puser;
 				user_tail = puser;
@@ -158,6 +178,7 @@ void init_env(p_stu_t* stu_list, p_user_t* user_list)
 
 	if (student_file != NULL)
 	{
+		/* Retrive Student Records from file as linked list */
 		while ((fscanf(student_file, "%d%s", &tmp_stu.stu_id, &tmp_stu.stu_name)) != EOF)
 		{
 			pstu = (p_stu_t)calloc(1, sizeof(stu_t));
@@ -165,8 +186,11 @@ void init_env(p_stu_t* stu_list, p_user_t* user_list)
 			strcpy(pstu->stu_name, tmp_stu.stu_name);
 			for (i = 0; i < COURSE_NUM_PER_STUDENT; i++)
 			{
+				/* Retriving Courses */
 				fscanf(student_file, "%d%lf", &pstu->course[i].course_id, &pstu->course[i].course_score);
 			}
+
+			/* Creating linked list based on read records */
 			if (NULL == stu_head->next)
 			{
 				pstu->next = stu_head->next;
@@ -219,6 +243,7 @@ void studb_update(p_stu_t* stu_list, char* str)
         printf("\nStudent File path inside Configuration file incorrect!\nStudent Details could not be updated to File.\n");
     else
     {
+    	/* Writing records held by 'stu_list' to file */
         while (NULL != p)
 		{
 			fprintf(student_file, "%4d  %-10s", p->stu_id, p->stu_name);
@@ -246,6 +271,7 @@ void userdb_update(p_user_t user_list, char* str)
     }
 	else
 	{
+		/* Writing records held by 'user_list' to file */
 	    while (NULL != p)
 		{
 			fprintf(user_file, "%-15s %-10s %d\n", p->name, p->pass, p->type);
