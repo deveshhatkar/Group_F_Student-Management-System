@@ -1,11 +1,14 @@
-// Todo: Doxygen comments; coding conservasion.
-// TO BE FIXED: details of "key" of finding a user in the linked list is ambigious.
-// ==> two kind of user search by name is implemented.
-
-// user.c
-// Siyuan Chen
-// Dec.17, 2020
-
+/** @file user.c
+ * 
+ * @brief User part functions of the program
+ * 
+ * user.c
+ * User functions of the program
+ * Includes all the functions defined as user part in the plan.
+ * 
+ * @author Siyuan Chen
+ * 
+ */
 #include <stdlib.h>
 #include "user.h"
 #include "ui.h"
@@ -23,6 +26,7 @@ int user_auth(p_user_t user_list, user_t user)
 	// Return 0 if nothing found.
 	return 0;
 }
+
 
 void user_query_listall(p_user_t user_list)
 {
@@ -43,6 +47,14 @@ void user_query_listall(p_user_t user_list)
 	return;
 }
 
+/** @brief List all users of admin type or student type. 
+ * 
+ * user_query_by_level
+ * Print all users with name of a certain type to stdout.
+ * @param[in] user_list p_user_t: The head of linked list of all user accounts.
+ * @param[in] 
+ */
+
 void user_query_by_level(p_user_t user_list)
 {
 	int account_type = ask_for_input("Enter an account type(0: Admin, 1: Student)", 1, 0, 1);
@@ -55,6 +67,7 @@ void user_query_by_level(p_user_t user_list)
 	getchar();
 	return;
 }
+
 
 int user_query_by_name(p_user_t user_list, char* input, int enable_output) 
 {
@@ -78,7 +91,8 @@ int user_query_by_name(p_user_t user_list, char* input, int enable_output)
 }
 
 
-void user_add(p_user_t user_list, char* str1) // with ui
+
+void user_add(p_user_t user_list, char* file_to_save) // with ui
 {
 	p_user_t p = user_list;
 	p_user_t _to_add=(p_user_t)calloc(1,sizeof(p_user_t));
@@ -101,12 +115,13 @@ void user_add(p_user_t user_list, char* str1) // with ui
 	p->next = _to_add;
 	_to_add->next = NULL;
 
-	userdb_update(user_list,str1);
+	userdb_update(user_list,file_to_save);
 
 	return;
 }
 
-void user_update(p_user_t user_list, char* str1)
+
+void user_update(p_user_t user_list, char* file_to_save)
 {
 	if(user_list==NULL){
 		printf("Empty user list, nothing to update\nPress Enter to return to the menu...");
@@ -134,7 +149,7 @@ void user_update(p_user_t user_list, char* str1)
 				p->type = _temp_account_type;
 				printf("Account type updated\n");
 			}
-			userdb_update(user_list,str1);
+			userdb_update(user_list,file_to_save);
 			getchar();
 			return;
 		}
@@ -144,7 +159,8 @@ void user_update(p_user_t user_list, char* str1)
 	return;
 }
 
-void user_del(p_user_t user_list, char* str1)
+
+void user_del(p_user_t user_list, char* file_to_save)
 {
 	if(user_list==NULL){
 		printf("Empty user list, nothing to delete\nPress Enter to return to the menu...");
@@ -165,7 +181,7 @@ void user_del(p_user_t user_list, char* str1)
 				p->next=p_next->next;
 				free(p_next);
 				free(user_to_delete);
-				userdb_update(user_list,str1);
+				userdb_update(user_list,file_to_save);
 				printf("Account deleted\n");
 				getchar();
 				return;
@@ -179,25 +195,3 @@ void user_del(p_user_t user_list, char* str1)
 	return;
 }
 
-char* password_create (char* output, int max_length){
-	char _temp_pass[max_length], _temp_pass_2[max_length];
-	char* result=(char*)calloc(max_length, sizeof(char));
-	for(;;){
-		for (int i=0;i<max_length;i++){
-			_temp_pass[i]  ='\0';
-			_temp_pass_2[i]='\0';
-		}
-		printf("%s: ",output);
-		get_pass(_temp_pass);
-		printf("Input Password Again:");
-		get_pass(_temp_pass_2);
-		if(strcmp(_temp_pass,_temp_pass_2)==0){
-			strcpy(result,_temp_pass);
-			return result;
-		}
-		else {
-			printf("Password not equal in two inputs.\nInput Again.\n\n");
-			continue;
-		}
-	}
-}
