@@ -2,6 +2,6 @@
 
 int main()
 {
-	int ret_code = app_start("./config/configuration_file.txt");
+	int ret_code = app_start("../config/configuration_file.txt");
 	return ret_code;
 }
