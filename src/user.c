@@ -84,6 +84,8 @@ void user_add(p_user_t user_list, char* file_to_save)
 	_to_add->next = NULL;
 
 	userdb_update(user_list, file_to_save);
+	printf("\nEnter to return...");
+	getchar();
 
 	return;
 }
@@ -113,12 +115,13 @@ void user_update(p_user_t user_list, char* file_to_save)
 				strcpy(p->pass, password_temp);
 				printf("Password updated\n");
 			}
-			account_type_temp = ask_for_input("Update Account Type\n(0: Admin, 1:Student, -1:Do not update)",true,-1,1);
+			account_type_temp = ask_for_input("Update Account Type(0: Admin, 1:Student, -1:Do not update)",true,-1,1);
 			if(account_type_temp != -1) {
 				p->type = account_type_temp;
 				printf("Account type updated\n");
 			}
 			userdb_update(user_list,file_to_save);
+			printf("\nEnter to return...");
 			getchar();
 			return;
 		}
@@ -151,7 +154,7 @@ void user_del(p_user_t user_list, char* file_to_save)
 				free(p_next);
 				free(user_to_delete);
 				userdb_update(user_list,file_to_save);
-				printf("Account deleted\n");
+				printf("Account deleted\nEnter to return...");
 				getchar();
 				return;
 			}
