@@ -1,6 +1,8 @@
 /**
 * \file ui.c
 * contains the functions which is about to display the system interface.
+*
+*this file is mainly to display the interface of the option between guest and admin and their relative functions.
 */
 #include <stdlib.h>
 #include <stdio.h>
