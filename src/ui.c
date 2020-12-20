@@ -23,6 +23,8 @@
 
 #define UI_INPUT_BUFFER_LEN 65536
 static char ui_input_buffer[UI_INPUT_BUFFER_LEN];
+
+
 /**
 * /brief This function gets the password the user inputs.
 */
@@ -51,6 +53,7 @@ void get_pass(char* password)
 	#endif
 }
 
+
 /**
 * /brief this function is used to clear screen in different system.
 */
@@ -68,6 +71,7 @@ void ui_cls()
 	#endif
 }
 
+
 /**
 * /brief this function is used to pause the interface.
 */
@@ -77,6 +81,8 @@ void ui_pause()
 	fflush(stdin);
 	gets(ui_input_buffer);
 }
+
+
 /**
 * /brief this function is used when the user input the wrong character.
 */
@@ -85,6 +91,8 @@ void ui_invalid_prompt()
 	printf("Invalid input! Press ENTER to continue.\n");
 	gets(ui_input_buffer);
 }
+
+
 /**
 * /brief this function is used to get the option the user choose. The input should be one character.
 */
@@ -98,6 +106,8 @@ char ui_get_option()
 		getchar();
 	}
 }
+
+
 /**
 * /brief this function is used to set a initialization interface.
 */
@@ -109,6 +119,7 @@ void ui_init()
 	printf("[1] Student\n");
 	printf("[2] Exit\n\n");
 }
+
 
 /**
 * /brief this function is used to invoke different functions based on the character user inputs.
@@ -139,6 +150,8 @@ void route_admin(p_user_t* user_list, p_stu_t* stu_list, char* str1, char* str2)
 		}
 	}
 }
+
+
 /**
 * /brief this function is used when the user is a guest.it just has one function,which is the stuinfo_query function.
 *@param[in] stu_list
@@ -159,6 +172,8 @@ void route_guest(p_stu_t stu_list)
 		}
 	}
 }
+
+
 /**
 * /brief this function displays the admin interface.
 */
@@ -174,6 +189,8 @@ void ui_admin()
 	printf("[8] %-8s account record\n", "search");
 	printf("[9] exit\n\n");
 }
+
+
 /**
 * /brief this function displays the guest interface.
 */
@@ -182,6 +199,8 @@ void ui_guest()
 	printf("[1] %-8s student record\n", "search");
 	printf("[2] exit\n");
 }
+
+
 /**
 * /brief this function is to display the interface what user could
 *do to search their results. for the admin, the interface will display one more
@@ -198,6 +217,8 @@ void ui_stu_query(int limit)
 	printf("[3] Back\n\n");
 
 }
+
+
 /**
 * /brief this function is to display the interface what user could
 *do to get accont records.
@@ -220,6 +241,8 @@ void ui_user_query(p_user_t user_list)
 
 	return;
 }
+
+
 /**
 * /brief this function is to get account records by name.
 */
@@ -229,6 +252,8 @@ void ui_user_query_by_name (p_user_t user_list)
 	user_query_by_name(user_list, string_input("Enter name", USER_NAME_MAXLEN),1);
 	ui_pause();
 }
+
+
 /**
 * /brief this function is used to exit the system.
 */
@@ -239,4 +264,3 @@ void ui_exit()
 	ui_pause();
 	exit(0);
 }
-
