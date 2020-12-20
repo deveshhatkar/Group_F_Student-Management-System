@@ -23,10 +23,8 @@
 #include "user.h"
 #include "ui.h"
 
-
 #define _type_account_admin 0
 #define _type_account_student 1
-
 
 /** @brief return the account type in string based on type integer defined in the struct.
  * 

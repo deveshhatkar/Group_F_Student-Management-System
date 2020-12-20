@@ -27,8 +27,8 @@ int ask_for_input(char* _to_print, bool bound_enable, int lower_bound, int upper
 
 	/* Self-Check without using assertion */
 	if(!(bound_enable == true || bound_enable == false)) { 
-			fprintf(stderr,"Internal Error: ask_for_input: bound_enable is %d, not true or false\nProgram Exits\n",bound_enable);
-			exit(-1);
+		fprintf(stderr,"Internal Error: ask_for_input: bound_enable is %d, not true or false\nProgram Exits\n",bound_enable);
+		exit(-1);
 	}
 	if(upper_bound < lower_bound){
 		fprintf(stderr,"Internal Error: ask_for_input: upper bound %d is less then lower bound %d\nProgram Exits\n",upper_bound,lower_bound);
@@ -36,16 +36,20 @@ int ask_for_input(char* _to_print, bool bound_enable, int lower_bound, int upper
 	}
 
 	/* Logic: ask_for_input */
-	int _to_return;
-	for(_to_return=INT_MIN;;){
+	int int_to_return;
+	for(int_to_return=INT_MIN;;){
 		if (bound_enable==false)       printf("%s:",_to_print);
 		else printf("%s (%d-%d):",_to_print,lower_bound,upper_bound);
-		scanf("%d",&_to_return);
+		scanf("%d",&int_to_return);
 		getchar();
 		if(bound_enable==1){
-			if(_to_return < lower_bound) printf("input %d is lower than limit %d\nPress Enter to try again\n",_to_return,lower_bound);
-			else if (_to_return > upper_bound) printf("input %d is higher than limit %d\nPress Enter to try again\n",_to_return,upper_bound);
-			else return _to_return;
+			if(int_to_return < lower_bound) {
+				printf("input %d is lower than limit %d\nPress Enter to try again\n",int_to_return,lower_bound);
+			}
+			else if (int_to_return > upper_bound) {
+				printf("input %d is higher than limit %d\nPress Enter to try again\n",int_to_return,upper_bound);
+			}
+			else return int_to_return;
 		}
 		getchar();
 	}
@@ -63,27 +67,27 @@ char* string_input(char* output, int max_length){
 		exit(-1);
 	}
 
-	char* _to_return = (char*) calloc(max_length + 1, sizeof(char));
+	char* string_to_return = (char*) calloc(max_length + 1, sizeof(char));
 	printf("%s: ",output);
-	scanf("%s", _to_return);
+	scanf("%s", string_to_return);
 	getchar();
-	return _to_return;
+	return string_to_return;
 }
 
 char* password_create (char* output, int max_length){
-	char _temp_pass[max_length], _temp_pass_2[max_length];
+	char temp_pass[max_length], temp_pass_2[max_length];
 	char* result=(char*)calloc(max_length, sizeof(char));
 	for(;;){
 		for (int i=0;i<max_length;i++){
-			_temp_pass[i]  ='\0';
-			_temp_pass_2[i]='\0';
+			temp_pass[i]  ='\0';
+			temp_pass_2[i]='\0';
 		}
 		printf("%s: ",output);
-		get_pass(_temp_pass);
+		get_pass(temp_pass);
 		printf("Input Password Again:");
-		get_pass(_temp_pass_2);
-		if(strcmp(_temp_pass,_temp_pass_2)==0){
-			strcpy(result,_temp_pass);
+		get_pass(temp_pass_2);
+		if(strcmp(temp_pass,temp_pass_2)==0){
+			strcpy(result,temp_pass);
 			return result;
 		}
 		else {

@@ -230,14 +230,15 @@ void ui_user_query(p_user_t user_list)
 	ui_cls();
 
 	char output_string[]="[0] Print all account record\n"
-					    "[1] search user account record by user type\n"
-					    "[2] search user account record by user name\n"
-					    "[3] Back\n\n";
+					     "[1] search user account record by user type\n"
+					     "[2] search user account record by user name\n"
+					     "[3] Back\n\n";
 
 	switch(ask_for_input(output_string,1,0,3)){
-		case 0: user_query_listall (user_list);break;
-		case 1: user_query_by_level(user_list);break;
+		case 0: user_query_by_level(user_list,-1);break;
+		case 1: user_query_by_level(user_list, ask_for_input("Enter an account type(0: Admin, 1: Student)", 1, 0, 1));break;
 		case 2: ui_user_query_by_name (user_list);break;
+		case 3: break;
 		default: fprintf(stderr,"Internal Error: ui_user_query: Out of boundary\nProgram Exits\n");exit(-1);
 	}
 
