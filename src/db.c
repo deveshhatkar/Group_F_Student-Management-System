@@ -5,7 +5,6 @@
 #include "stu.h"
 #include "ui.h"
 #include "user.h"
-#include "platform.h"
 
 char student_file_path[1024];
 char user_file_path[1024];
@@ -231,7 +230,7 @@ void studb_update(p_stu_t* stu_list, char* str)
 		}
 
 		fclose(student_file);
-		printf("Student File Updated!");
+		printf("Student File Updated!\n");
     }
 }
 
@@ -242,7 +241,7 @@ void userdb_update(p_user_t user_list, char* str)
 	
 	if(NULL == user_file)
     {
-        printf("\nUser File path inside Configuration file incorrect!\nUser Details could not be updated to File.");
+        printf("\nUser File path inside Configuration file incorrect!\nUser Details could not be updated to File.\n");
     }
 	else
 	{
@@ -251,7 +250,7 @@ void userdb_update(p_user_t user_list, char* str)
 			fprintf(user_file, "%-15s %-10s %d\n", p->name, p->pass, p->type);
 			p = p->next;
 		}
-
 		fclose(user_file);
+		printf("User File Updated!\n");
 	}
 }

@@ -39,7 +39,7 @@ int ask_for_input(char* _to_print, bool bound_enable, int lower_bound, int upper
 	int int_to_return;
 	for(int_to_return=INT_MIN;;){
 		if (bound_enable==false)       printf("%s:",_to_print);
-		else printf("%s (%d-%d):",_to_print,lower_bound,upper_bound);
+		else printf("%s (%d - %d):",_to_print,lower_bound,upper_bound);
 		scanf("%d",&int_to_return);
 		getchar();
 		if(bound_enable==1){
