@@ -245,7 +245,6 @@ void userdb_update(p_user_t user_list, char* str)
     }
 	else
 	{
-	    printf("\nFound user file!");
 	    while (NULL != p)
 		{
 			fprintf(user_file, "%-15s %-10s %d\n", p->name, p->pass, p->type);
@@ -253,6 +252,5 @@ void userdb_update(p_user_t user_list, char* str)
 		}
 
 		fclose(user_file);
-		printf("User File Updated!");
 	}
 }
