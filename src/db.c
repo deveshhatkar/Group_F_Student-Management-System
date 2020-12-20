@@ -43,18 +43,19 @@ int app_start(char* conf_file_path)
             strncpy(student_file_path, r_str, strlen(r_str));
 
         int i = 0;
-
-        while(1)
-        {
-            if(student_file_path[i] == '\n')
-            {
+        while(1){
+            if(student_file_path[i] == '\r' || student_file_path[i] == '\n'){
                 student_file_path[i] = '\0';
                 break;
             }
             i++;
         }
-
-        user_file_path[strlen(user_file_path)] = '\0';
+		for(i = 0; i<strlen(user_file_path); i++){
+			if(user_file_path[i] == '\r' || user_file_path[i] == '\n'){
+				user_file_path[i]='\0';
+				break;
+			}
+		}
     }
 
 	init_env(&stu_list, &user_list);
@@ -152,7 +153,7 @@ void init_env(p_stu_t* stu_list, p_user_t* user_list)
 	{
 		printf("User data could not be Loaded.(\"%s\")\nPlease check if the User data file exists!\nPress Enter to exit program\n", user_file_path);
 		getchar();
-		return;
+		exit(-1);
 	}
 
 	if (student_file != NULL)
@@ -203,7 +204,7 @@ void init_env(p_stu_t* stu_list, p_user_t* user_list)
 	{
 		printf("Student data could not be Loaded.(\"%s\")\nPlease check if the Student data file exists!\nPress Enter to exit program\n",student_file_path);
 		getchar();
-		return;
+		exit(-1);
 	}
 		
 }
