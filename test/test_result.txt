@@ -1,0 +1,24 @@
+Test #1 started:  user_query_by_level (list all only)
+Success
+
+
+Test #2 started:  user_query_by_level (all cases)
+Success
+
+
+Test #3 started:  user_query_by_name
+Success
+
+
+Test #4 started:  user_add
+Success
+
+
+Test #5 started:  user_del
+Success
+
+
+Test #6 started:  user_update
+Success
+
+

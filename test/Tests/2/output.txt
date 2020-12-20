@@ -1,0 +1,60 @@
+
+welcome to Student Record Management System!
+Choose your account type:
+
+[0] Admin
+[1] Student
+[2] Exit
+
+Please enter a number to select your account type: 
+[1] add      new student record
+[2] delete   existed student record
+[3] modify   existed student record
+[4] search   student record
+[5] add      new user account record
+[6] delete   existed account record
+[7] modify   existed account record
+[8] search   account record
+[9] exit
+
+Please enter a number: (1 - 9):
+[0] Print all account record
+[1] search user account record by user type
+[2] search user account record by user name
+[3] Back
+
+ (0 - 3):Enter an account type(0: Admin, 1: Student) (0 - 1):Username: Dev, Type: Admin
+Username: Siyuan, Type: Admin
+Username: Mingfang, Type: Admin
+Username: Harsh, Type: Admin
+Press Enter to return to the menu...
+[1] add      new student record
+[2] delete   existed student record
+[3] modify   existed student record
+[4] search   student record
+[5] add      new user account record
+[6] delete   existed account record
+[7] modify   existed account record
+[8] search   account record
+[9] exit
+
+Please enter a number: (1 - 9):
+[0] Print all account record
+[1] search user account record by user type
+[2] search user account record by user name
+[3] Back
+
+ (0 - 3):Enter an account type(0: Admin, 1: Student) (0 - 1):Username: Qun, Type: Student
+Press Enter to return to the menu...
+[1] add      new student record
+[2] delete   existed student record
+[3] modify   existed student record
+[4] search   student record
+[5] add      new user account record
+[6] delete   existed account record
+[7] modify   existed account record
+[8] search   account record
+[9] exit
+
+Please enter a number: (1 - 9):
+Thank you for using student record management system!
