@@ -6,15 +6,15 @@
 #define COURSE_NUM_PER_STUDENT 3
 
 typedef struct course {
-	int course_id;
-	double course_score;
+    int course_id;
+    double course_score;
 }course_t, * p_course_t;
 
 typedef struct student {
-	int stu_id;
-	char stu_name[STUDENT_NAME_MAXLEN + 1];
-	course_t course[COURSE_NUM_PER_STUDENT];
-	struct student* next;
+    int stu_id;
+    char stu_name[STUDENT_NAME_MAXLEN + 1];
+    course_t course[COURSE_NUM_PER_STUDENT];
+    struct student* next;
 }stu_t, * p_stu_t;
 
 
