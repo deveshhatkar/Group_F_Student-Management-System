@@ -23,7 +23,7 @@
  * Reads file paths for Student and User records file from configuration file.
  * Promts User sign in and routes the flow based on type of user authenticated.
  * @param[in] conf_file_path: Must hold path to the configuration file.
- * @returns void
+ * @returns 0 if app exit normally, -1 if an error occurs
  */ 
 int app_start(char* conf_file_path);
 
