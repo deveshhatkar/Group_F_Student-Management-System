@@ -1,7 +1,6 @@
 # Student Records Management System
 
 ## Release 2
-<br/>
 
 
 # Authors
@@ -12,13 +11,11 @@
 | Devesh Prabhakar Hatkar  |File-related functions, Wiki                    |
 | Mingfang Hu              |User interface functions                        |
 
-<br/>
 
 ## Organization
 - Carleton University
 - University of Ottawa
 
-<br/>
 
 # Introduction
 The Student Records Management System aims to digitize and hence ease the process of maintaining student details (such as their personal information, Grades, Courses enrolled) enrolled in an institution. The main motivation behind developing this project is to reduce the overhead of maintaining a physical file system for bookkeeping student information, which is both time consuming and prone to inconsistencies. This software ensures speedy creation/updation/deletion of this data. Additionally a digital system (and hence also this software) also ensures (almost) instant retrieval of this data based on various search parameters; which otherwise would be time consuming and effortful, if done conventionally.
